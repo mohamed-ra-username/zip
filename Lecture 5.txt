@@ -1,0 +1,341 @@
+ANDROID DEVELOPMENT COURSE
+
+Event Handling
+and User Interaction
+
+My App
+Enter first number
+
+Enter second number
+
+Choose operation
+
+Lecture 5 • Java
+Responding to button clicks
+
+Calculate
+Result: 15
+
+Reading and validating user input
+Updating the screen from Java
+Building a simple calculator
+From static layouts to working apps
+
+1. What Is Event Handling?
+Event handling lets an app respond to a
+user's actions.
+An event might be a tap, text entry, or
+selection.
+A listener waits for an event and runs
+code when it occurs.
+Today: button clicks + reading input +
+showing output.
+
+Android Development • Java • Lecture 5
+
+02
+
+Key idea: the user does something →
+your Java code responds.
+
+Example: tapping Calculate triggers a
+method that reads two numbers and
+displays their sum.
+
+2. Common Events in Android
+
+Event
+
+Example
+
+Click
+
+User taps a Button
+
+Text change
+
+User types in EditText
+
+Item selection
+
+User chooses from a Spinner
+
+Long click
+
+User presses and holds a view
+
+This lecture focuses on click events and input from EditText.
+
+Android Development • Java • Lecture 5
+
+03
+
+3. Setting a Click Listener
+Find the Button from the XML layout.
+Attach a listener using
+setOnClickListener().
+
+Button btn = findViewById(R.id.btnShow);
+
+Place the response code inside
+onClick().
+Use a lambda for concise Java 8+ code.
+
+btn.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+// Runs when the button is tapped
+Toast.makeText(
+MainActivity.this,
+"Button clicked!",
+Toast.LENGTH_SHORT
+).show();
+}
+});
+
+Short form (Java 8+): btn.setOnClickListener(v -> showMessage());
+Android Development • Java • Lecture 5
+
+04
+
+4. Reading Input from EditText
+EditText lets users enter text or numbers.
+getText() returns an editable text value.
+toString() converts it into a String.
+Check for empty input before
+processing.
+
+EditText input = findViewById(R.id.editNumber);
+String text = input.getText().toString().trim();
+if (text.isEmpty()) {
+Toast.makeText(this,
+"Please enter a value",
+Toast.LENGTH_SHORT).show();
+return;
+}
+My App
+Enter number
+
+For numeric input, use inputType="numberDecimal" in XML when appropriate.
+
+Android Development • Java • Lecture 5
+
+05
+
+Show
+
+5. Updating the User Interface
+After processing input, show feedback in
+a view.
+Use setText() to update a TextView.
+Use Toast for short messages.
+Keep long-running work off the main UI
+thread.
+
+TextView resultText = findViewById(R.id.textResult);
+int a = 7;
+int b = 8;
+int result = a + b;
+resultText.setText("Result: " + result);
+
+Expected screen text: Result: 15
+
+Android Development • Java • Lecture 5
+
+06
+
+6. Input Validation and Safe Parsing
+Users may leave fields empty or type invalid
+values.
+Double.parseDouble() converts text to a
+number.
+Use try/catch to handle
+NumberFormatException.
+Check special cases, such as division by
+zero.
+
+String text = editNumber.getText()
+.toString().trim();
+try {
+double value = Double.parseDouble(text);
+textResult.setText("Value: " + value);
+} catch (NumberFormatException e) {
+Toast.makeText(this,
+"Enter a valid number",
+Toast.LENGTH_SHORT).show();
+}
+
+Validation improves usability and prevents common runtime errors.
+Android Development • Java • Lecture 5
+
+07
+
+7. Practical Project: Simple Calculator
+
+Calculator
+
+Two number fields
+An operation selector (+, −, ×, ÷)
+
+First number
+
+A Calculate button
+
+Second number
+
+A TextView for the answer
+
+Operation: +
+
+Validation for empty or invalid values
+
+Calculate
+Result: 15
+
+Build the layout first, then connect every view to Java.
+Android Development • Java • Lecture 5
+
+08
+
+8. XML Layout: activity_main.xml
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="20dp">
+<EditText
+android:id="@+id/editNumber1"
+android:hint="First number"
+android:inputType="numberDecimal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content" />
+<EditText
+android:id="@+id/editNumber2"
+android:hint="Second number"
+android:inputType="numberDecimal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content" />
+<Button
+android:id="@+id/btnCalculate"
+android:text="Calculate"
+android:layout_width="match_parent"
+android:layout_height="wrap_content" />
+<TextView
+android:id="@+id/textResult"
+android:text="Result:"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+/>
+Note: Add a Spinner or another input control if you want students to select the arithmetic operation.
+</LinearLayout>
+Android Development • Java • Lecture 5
+09
+
+9. MainActivity.java: Connect the Views
+
+public class MainActivity extends AppCompatActivity {
+private EditText editNumber1, editNumber2;
+private TextView textResult;
+private Button btnCalculate;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+editNumber1 = findViewById(R.id.editNumber1);
+editNumber2 = findViewById(R.id.editNumber2);
+textResult = findViewById(R.id.textResult);
+btnCalculate = findViewById(R.id.btnCalculate);
+btnCalculate.setOnClickListener(v -> calculate());
+}
+}
+
+Make sure the Java IDs exactly match the IDs in your XML file.
+Android Development • Java • Lecture 5
+
+10
+
+10. Implementing the calculate() Method
+
+private void calculate() {
+String s1 = editNumber1.getText().toString().trim();
+String s2 = editNumber2.getText().toString().trim();
+if (s1.isEmpty() || s2.isEmpty()) {
+textResult.setText("Please enter both numbers.");
+return;
+}
+try {
+double n1 = Double.parseDouble(s1);
+double n2 = Double.parseDouble(s2);
+double result = n1 + n2; // Start with addition
+textResult.setText("Result: " + result);
+} catch (NumberFormatException e) {
+textResult.setText("Please enter valid numbers.");
+}
+}
+Extension: add an operation Spinner and handle subtraction, multiplication, and division.
+Android Development • Java • Lecture 5
+
+11
+
+11. How the App Works: Event Flow
+1. User enters two values
+↓
+2. User taps Calculate
+↓
+3. Click listener calls calculate()
+↓
+4. Java validates and processes input
+↓
+5. TextView displays the result
+
+Android Development • Java • Lecture 5
+
+12
+
+12. Tips and Best Practices
+Always validate user input.
+Use clear IDs and meaningful variable names.
+Give users useful feedback when something goes wrong.
+Keep click handlers short; move logic into methods.
+Avoid blocking the main thread with slow tasks.
+Test empty, invalid, negative, and boundary values.
+
+Android Development • Java • Lecture 5
+
+13
+
+13. Summary
+Event handling connects user actions to Java code.
+setOnClickListener() responds to button taps.
+getText().toString() reads EditText content.
+setText() updates the interface.
+Validation and exception handling make apps more reliable.
+The calculator demonstrates the full interaction cycle.
+
+Next lecture: Activities and Intents — moving between screens.
+Android Development • Java • Lecture 5
+
+14
+
+14. Homework and Practice
+Task 1 — Build a temperature converter
+Convert Celsius to Fahrenheit and Fahrenheit to Celsius.
+Use EditText, a Button, and a TextView.
+Validate the input and show an error for invalid values.
+
+Task 2 — Improve the calculator
+Add a Clear button to reset both fields and the result.
+Handle division by zero.
+Display results with a sensible number of decimal places.
+Goal: practice reading input, responding to clicks, and updating views.
+Android Development • Java • Lecture 5
+
+15
+
+Thank You!
+Questions?
+
+Android Development • Java • Lecture 5
+
+

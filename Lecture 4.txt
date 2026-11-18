@@ -1,0 +1,33 @@
+Mobile development
+by
+Associate professor Ayman Youssef Mahgoub
+Electronics research institute
+
+outline
+• Relative layout.
+• Examples.
+• Margin.
+• Difference between padding and margin.
+• Margin example.
+• Constraint layout.
+• Comparison between constraint layout and (linear, relative) layout.
+
+Constraint layout vs relative layout
+
+Constraint layout
+
+Relative or linear layout
+
+Easier to design less code
+
+Harder need more programming
+
+Executes the same on different devices
+
+Executes different on different devices
+
+Executes fast
+
+Need processing time
+
+

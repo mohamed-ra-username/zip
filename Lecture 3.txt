@@ -1,0 +1,19 @@
+Mobile development
+by
+Dr. Ayman Youssef Mahgoub
+Associate professor of AI and Its applications
+
+outline
+• Image view attributes.
+• EditText.
+• Edit text input types attributes.
+• Working with a number of views.
+• View group.
+• Different layouts.
+• Linear layout.
+• Practical examples on linear layout.
+• Relative layout.
+
+Edit text
+
+

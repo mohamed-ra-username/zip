@@ -1,0 +1,49 @@
+Mobile development
+by
+Associate professor Ayman Youssef Mahgoub
+Electronics research institute
+
+outline
+• Introduction to xml.
+• Four most important xml views.
+• Important xml views definitions.
+• xml syntax.
+• Xml Example.
+• View attributes.
+• Height and width attribute.
+• Text size attribute.
+• Text color attribute.
+• Background color attribute.
+• Image view.
+
+Introduction to xml
+
+Important xml views definitions
+
+Example
+
+dp makes layout looks the same on different android mobiles screens.
+
+Text Size attribute
+
+Text size attribute
+
+SP makes text flexible with user preferences
+
+Font family attribute
+
+Text color
+
+Hex code
+
+Background color
+
+Colors File
+
+Using text color file
+
+Summary so far
+
+Image view
+
+

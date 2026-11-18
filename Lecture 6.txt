@@ -1,0 +1,251 @@
+ANDROID DEVELOPMENT COURSE
+
+Activities and Intents
+Lecture 6 • Java
+
+Moving between screens
+Passing data between activities
+Opening built-in apps with intents
+
+From a single-screen app to a multi-screen experience
+
+1. Learning Objectives
+• Explain what an Activity represents in an Android application.
+• Describe how an Intent requests an action from another component.
+• Open a second Activity using an explicit Intent.
+• Pass simple data between screens using Intent extras.
+• Use an implicit Intent to open a web page or another compatible app.
+
+Goal: build a two-screen app that sends information from one screen to another.
+
+Android Development • Java • Lecture 6
+
+02
+
+2. What Is an Activity?
+• An Activity is an Android component that provides a screen for user interaction.
+• Each Activity usually represents one focused task or screen.
+• Examples: LoginActivity, MainActivity, DetailsActivity.
+• The Activity loads its interface with setContentView().
+• An app can contain several Activities connected through navigation.
+
+Think of an Activity as one screen in your app.
+
+Android Development • Java • Lecture 6
+
+03
+
+3. What Is an Intent?
+• An Intent is a message object describing an action to perform.
+• Explicit Intent: names the exact component to open.
+• Implicit Intent: describes an action; Android finds a suitable app.
+• Intents can carry small pieces of data called extras.
+• Common uses: open a screen, share text, dial a number, or view a URL.
+
+Activity = screen/component
+
+Android Development • Java • Lecture 6
+
+04
+
+•
+
+Intent = request/action
+
+4. Explicit vs. Implicit Intents
+
+EXPLICIT INTENT
+
+IMPLICIT INTENT
+
+You name the destination component.
+
+You describe the action to perform.
+
+Example:
+
+Example:
+
+MainActivity → DetailsActivity
+
+Open https://developer.android.com
+
+Best for navigation inside your app.
+
+Android chooses a compatible app.
+
+Use explicit Intents for your own screens; use implicit Intents for system/app-actions.
+
+Android Development • Java • Lecture 6
+
+05
+
+5. Create a Second Activity
+• In Android Studio, create a new Activity named DetailsActivity.
+• Android Studio normally creates its Java class and layout file.
+• Check that the Activity is declared in AndroidManifest.xml.
+• Keep the screen purpose simple: display a title or details.
+public
+classwhen
+DetailsActivity
+extends
+AppCompatActivity {
+• Use the exact class
+name
+constructing
+the Intent.
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_details);
+}
+
+}
+
+Android Development • Java • Lecture 6
+
+06
+
+6. Open the Second Screen
+In MainActivity.java
+Button btnDetails = findViewById(R.id.btnDetails);
+btnDetails.setOnClickListener(v -> {
+Intent intent = new Intent(
+MainActivity.this,
+DetailsActivity.class
+);
+startActivity(intent);
+});
+
+Import android.content.Intent and make sure the button ID exists in XML.
+
+Android Development • Java • Lecture 6
+
+07
+
+7. Pass Data with Intent Extras
+Sending data from MainActivity
+Intent intent = new Intent(
+MainActivity.this, DetailsActivity.class
+);
+intent.putExtra("USER_NAME", "Sara");
+startActivity(intent);
+
+Receiving data in DetailsActivity
+String name = getIntent().getStringExtra("USER_NAME");
+TextView welcome = findViewById(R.id.textWelcome);
+welcome.setText("Welcome, " + name);
+
+The extra key must match exactly on both screens.
+Android Development • Java • Lecture 6
+
+08
+
+8. Build the Details Screen Layout
+
+<!-- activity_details.xml -->
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="24dp">
+<TextView
+android:id="@+id/textWelcome"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Welcome!"
+android:textSize="24sp" />
+</LinearLayout>
+
+Android Development • Java • Lecture 6
+
+09
+
+9. Open a Web Page with an Implicit Intent
+
+String url = "https://developer.android.com";
+Uri webpage = Uri.parse(url);
+Intent intent = new Intent(
+Intent.ACTION_VIEW, webpage
+);
+startActivity(intent);
+
+• ACTION_VIEW asks Android to display the supplied data.
+• Uri.parse() turns the URL string into a Uri object.
+• A browser or another compatible app may handle the request.
+Add imports for android.content.Intent and android.net.Uri.
+Android Development • Java • Lecture 6
+
+10
+
+10. Handle Missing or Unexpected Data
+
+String name = getIntent().getStringExtra("USER_NAME");
+if (name == null || name.trim().isEmpty()) {
+name = "Guest";
+}
+TextView welcome = findViewById(R.id.textWelcome);
+welcome.setText("Welcome, " + name);
+• Extras may be absent if a screen is opened from another route.
+• Provide a sensible default instead of displaying null.
+• Pass only the data the destination screen needs.
+• Do not place passwords or other secrets in ordinary Intent extras.
+Android Development • Java • Lecture 6
+
+11
+
+11. Navigation Flow
+
+MainActivity
+
+Intent + extra
+
+Tap button
+
+Pass USER_NAME
+
+DetailsActivity
+
+Read extra
+
+Display data
+
+User action → create Intent → start Activity → receive extra → update UI.
+
+Android Development • Java • Lecture 6
+
+12
+
+12. Common Mistakes and Best Practices
+• Calling startActivity() with the wrong destination class.
+• Using different extra keys when sending and receiving data.
+• Forgetting to create the target Activity or its layout.
+• Calling findViewById() before setContentView() for that layout.
+• Assuming an extra is always present; check for null.
+• Use clear key names and keep each Activity focused on one task.
+
+Android Development • Java • Lecture 6
+
+13
+
+13. Summary
+• An Activity represents a screen in an Android app.
+• An Intent requests an action or launches a component.
+• Explicit Intents are useful for navigation within your app.
+• putExtra() sends data; getStringExtra() retrieves a String extra.
+• Implicit Intents can delegate actions such as viewing a web page.
+• Validate incoming data and provide sensible defaults.
+
+Next lecture: RecyclerView and displaying lists of data.
+
+Android Development • Java • Lecture 6
+
+14
+
+Thank You!
+Questions?
+
+Android Development • Java • Lecture 6
+
+

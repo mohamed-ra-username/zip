@@ -1,0 +1,81 @@
+Mobile development
+by
+Associate professor Ayman Youssef Mahgoub
+Electronics research institute
+
+outline
+• What is a mobile application. Examples on mobile applications.
+• What is android? Android history.
+• Why android programming ?.
+• Android project layout.
+• JAVA language advantages.
+• JAVA first program hello world.
+• JAVA program structure.
+• JAVA second program.
+• Operators in JAVA.
+• Identifiers in JAVA.
+• JAVA constants.
+
+Why android programming
+
+You can reach millions of users through android play store.
+You can download app from different store like Amazon which increases opportunity to reach more users.
+Development environment is free.
+Gain money:
+Add Ads to the app.
+Or
+Place as paid app
+
+Java language advantages
+• Java is a widely used programming language for building web,
+desktop, mobile, and enterprise applications. It is known for its simple
+syntax, portability, and powerful features that make development
+easier and more secure.
+• Java is a high-level, robust, secure, and object-oriented programming
+language developed by James Gosling at Sun Microsystems in 1995. It
+is currently owned by Oracle.
+• Easy to learn language.
+• Supports Object oriented programming.
+• Rich standard libraries.
+
+Hello world JAVA
+
+JAVA program structure
+
+How java code runs ?
+
+JAVA applications
+
+Another JAVA example
+
+Printing numbers in JAVA
+
+JAVA comments
+
+JAVA variables
+In Java, there are different types of variables, for example:
+• String - stores text, such as "Hello".
+String values are surrounded by double quotes
+• int - stores integers (whole numbers), without decimals, such as 123
+or -123
+• float - stores floating point numbers, with decimals, such as 19.99 or
+-19.99
+• char - stores single characters, such as 'a' or 'B'. Char values are
+surrounded by single quotes
+• boolean - stores values with two states: true or false
+
+Examples
+
+Examples
+
+Examples
+
+Addition operation
+
+Declare multiple variables
+
+Identifiers in JAVA
+
+Invalid identifier
+
+
